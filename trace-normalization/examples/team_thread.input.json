@@ -1,0 +1,32 @@
+{
+  "_id": "run-team-1",
+  "type": "action_team_run",
+  "status": "success",
+  "result": {
+    "name": "Review team",
+    "thread": [
+      {
+        "member_id": "member-1",
+        "action_id": "action-1",
+        "action_run_id": "child-run-1",
+        "name": "Researcher",
+        "role": "member",
+        "input": {"text": "draft the note"},
+        "output": {"text": "the note"},
+        "started_at": "2026-10-28T02:00:00Z",
+        "ended_at": "2026-10-28T02:00:05Z",
+        "duration_ms": 5000
+      },
+      {
+        "name": "Lead",
+        "role": "leader",
+        "input": {"text": "approve it"},
+        "output": {"text": "approved"}
+      }
+    ],
+    "results": [
+      {"input": {"text": "THREAD-WINS-SENTINEL"}, "output": {"text": "no"}}
+    ],
+    "current_active_members": [{"member_id": "member-1"}]
+  }
+}

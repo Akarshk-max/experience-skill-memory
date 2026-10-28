@@ -1,0 +1,30 @@
+{
+  "_id": "run-ask-1",
+  "type": "action_run",
+  "status": "success",
+  "parent_action_result_id": "parent-1",
+  "run_kind": "subagent",
+  "human_questions": [
+    {
+      "question_id": "q-1",
+      "turn_index": 0,
+      "status": "answered",
+      "question": "Which account?",
+      "asked_at": "2026-10-28T04:00:00Z",
+      "options": [{"label": "42", "description": "OPTION-SENTINEL"}],
+      "answer": {
+        "selected": ["42"],
+        "text": "api_key: fixture-answer-secret",
+        "urls": ["https://files.example/answer-url-sentinel"],
+        "skipped": false,
+        "answered_by": "user-9",
+        "answered_at": "2026-10-28T04:01:00Z"
+      }
+    }
+  ],
+  "result": {
+    "results": [
+      {"input": {"text": "ask the user"}, "output": {"text": "asked"}, "turn": 0}
+    ]
+  }
+}

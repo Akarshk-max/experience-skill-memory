@@ -1,0 +1,75 @@
+{
+  "disposition": "normalized",
+  "detail": "Normalized.",
+  "episode": {
+    "episode_id": "run-results-1",
+    "schema_version": 2,
+    "source_run_id": "run-results-1",
+    "event_type": "action_run",
+    "source": {
+      "collection": "EventResults",
+      "source_run_id": "run-results-1",
+      "event_type": "action_run"
+    },
+    "task_intent": "Plain action",
+    "actions": [
+      "first",
+      "retry"
+    ],
+    "environment": {
+      "available_tools": [],
+      "permissions": null,
+      "constraints": null
+    },
+    "outcome": "error",
+    "steps": [
+      {
+        "action": "first",
+        "observation": "second",
+        "turn_no": 0,
+        "attempt": 1,
+        "step_status": "success",
+        "started_at": "2026-10-28T01:00:01Z",
+        "ended_at": "2026-10-28T01:00:02Z",
+        "timestamp": "2026-10-28T01:00:01Z",
+        "duration_ms": 1000,
+        "index": 0,
+        "step_reward": null,
+        "reward_metadata": {
+          "method": "progress_delta",
+          "p_before": null,
+          "p_after": null,
+          "status": "pending",
+          "rationale": null
+        }
+      },
+      {
+        "action": "retry",
+        "error": "token: ***REDACTED***",
+        "turn_no": 1,
+        "attempt": 2,
+        "step_status": "error",
+        "started_at": "2026-10-28T01:00:03Z",
+        "timestamp": "2026-10-28T01:00:03Z",
+        "index": 1,
+        "step_reward": null,
+        "reward_metadata": {
+          "method": "progress_delta",
+          "p_before": null,
+          "p_after": null,
+          "status": "pending",
+          "rationale": null
+        }
+      }
+    ],
+    "reward_metadata": {
+      "method": "progress_delta",
+      "status": "pending",
+      "aggregation": "not_defined"
+    },
+    "bucket_id": null,
+    "warnings": [],
+    "task_summary": "Plain action",
+    "error_message": "provider timed out"
+  }
+}

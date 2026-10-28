@@ -1,0 +1,6 @@
+{
+  "_id": "run-tool-stuck",
+  "type": "tool_run",
+  "status": "stuck",
+  "result": {"tool_name": "wait_for_user", "tool_args": {}, "output": null}
+}

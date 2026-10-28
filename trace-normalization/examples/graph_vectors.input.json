@@ -1,0 +1,55 @@
+{
+  "id": "run-graph-1",
+  "type": "action_graph_run",
+  "status": "success",
+  "user_id": "user-2",
+  "result": {
+    "name": "Cycle graph",
+    "start_node_id": "start",
+    "node_vectors": {
+      "n2": {
+        "slots": {
+          "0": {
+            "entries": [
+              {
+                "turn_no": 0,
+                "node_id": "start",
+                "input": {"text": "n2 start"},
+                "output": {"text": "n2 out"}
+              }
+            ]
+          }
+        }
+      },
+      "n1": {
+        "slots": {
+          "1": {
+            "entries": [
+              {"turn_no": 0, "node_id": "redirect", "input": {"text": "later slot"}}
+            ]
+          },
+          "0": {
+            "entries": [
+              {"turn_no": 0, "node_id": "redirect", "input": {"text": "from redirect"}},
+              {
+                "turn_no": 0,
+                "node_id": "start",
+                "input": {"text": "from start"},
+                "output": {"text": "start out"}
+              }
+            ]
+          }
+        }
+      }
+    },
+    "output": {
+      "n1": {
+        "name": "First node",
+        "results": [
+          {"input": {"text": "INNER-SENTINEL"}, "output": {"text": "should not expand"}}
+        ]
+      },
+      "only_output": {"name": "Missing vector", "input": {"text": "OUTPUT-ONLY-SENTINEL"}}
+    }
+  }
+}

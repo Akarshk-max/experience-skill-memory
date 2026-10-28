@@ -1,0 +1,91 @@
+{
+  "disposition": "normalized",
+  "detail": "Normalized.",
+  "episode": {
+    "episode_id": "run-archive-1",
+    "schema_version": 2,
+    "source_run_id": "run-archive-1",
+    "event_type": "action_run",
+    "source": {
+      "collection": "EventResults",
+      "source_run_id": "run-archive-1",
+      "event_type": "action_run",
+      "user_id": "user-1",
+      "file_url": "https://files.example/action_runs/user-1/run-archive-1.json"
+    },
+    "task_intent": "Find whether the account is active.",
+    "actions": [
+      "Look up account 42",
+      "lookup_account"
+    ],
+    "environment": {
+      "available_tools": [
+        "lookup_account"
+      ],
+      "permissions": null,
+      "constraints": null
+    },
+    "outcome": "success",
+    "steps": [
+      {
+        "turn_no": 1,
+        "timestamp": "2026-10-28T00:00:01Z",
+        "action": "Look up account 42",
+        "index": 0,
+        "step_reward": null,
+        "reward_metadata": {
+          "method": "progress_delta",
+          "p_before": null,
+          "p_after": null,
+          "status": "pending",
+          "rationale": null
+        }
+      },
+      {
+        "turn_no": 1,
+        "action": "lookup_account",
+        "call_id": "call-1",
+        "tool_arguments": {
+          "account_id": "42"
+        },
+        "tool_result": "status=active api_key: ***REDACTED***",
+        "index": 1,
+        "step_reward": null,
+        "reward_metadata": {
+          "method": "progress_delta",
+          "p_before": null,
+          "p_after": null,
+          "status": "pending",
+          "rationale": null
+        }
+      },
+      {
+        "turn_no": 1,
+        "observation": "Account 42 is active.",
+        "index": 2,
+        "step_reward": null,
+        "reward_metadata": {
+          "method": "progress_delta",
+          "p_before": null,
+          "p_after": null,
+          "status": "pending",
+          "rationale": null
+        }
+      }
+    ],
+    "reward_metadata": {
+      "method": "progress_delta",
+      "status": "pending",
+      "aggregation": "not_defined"
+    },
+    "bucket_id": null,
+    "warnings": [
+      "The file_url query string was removed before it was stored.",
+      "queued_inputs was not converted into steps.",
+      "input_archive supplied the steps. ActionResult rows were not merged, so their timestamps, attempt, and turn status are not on these steps."
+    ],
+    "task_summary": "Lookup account\nFind whether the account is active.",
+    "source_created_at": "2026-10-28T00:00:00Z",
+    "source_updated_at": "2026-10-28T00:01:00Z"
+  }
+}

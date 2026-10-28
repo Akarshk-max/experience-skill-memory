@@ -1,0 +1,5 @@
+{
+  "disposition": "payload_not_loaded",
+  "detail": "file_url is set, but the detailed trace payload is not on this document. It was not treated as loaded.",
+  "episode": null
+}

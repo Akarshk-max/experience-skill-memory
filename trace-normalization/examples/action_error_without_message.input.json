@@ -1,0 +1,10 @@
+{
+  "_id": "run-error-1",
+  "type": "action_run",
+  "status": "error",
+  "result": {
+    "results": [
+      {"input": {"text": "tried"}, "output": {"text": "failed visibly"}}
+    ]
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://autobots.local/write-path/skill-memory/skill.schema.json",
+  "title": "CandidateSkill",
+  "description": "Schema version 1. A reusable candidate behavior derived from one evidence bucket. Status is candidate. This record is not a product Skills document and it is not published.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "skill_id",
+    "schema_version",
+    "bucket_id",
+    "name",
+    "description",
+    "status",
+    "version",
+    "trigger_conditions",
+    "environment_conditions",
+    "procedure",
+    "action_triggers",
+    "success_criteria",
+    "failure_handling",
+    "constraints",
+    "evidence_refs",
+    "reward_summary",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "skill_id": {"type": "string", "minLength": 1},
+    "schema_version": {"const": 1},
+    "bucket_id": {"type": "string", "minLength": 1},
+    "name": {"type": "string", "minLength": 1},
+    "description": {"type": "string", "minLength": 1},
+    "status": {"const": "candidate"},
+    "version": {"const": 1},
+    "trigger_conditions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "environment_conditions": {"$ref": "#/$defs/environmentConditions"},
+    "procedure": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/procedureStep"}
+    },
+    "action_triggers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/actionTrigger"}
+    },
+    "success_criteria": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "failure_handling": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "constraints": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "evidence_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/episodeRef"}
+    },
+    "reward_summary": {"$ref": "#/$defs/rewardSummary"},
+    "created_at": {"type": "string", "minLength": 1},
+    "updated_at": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "environmentConditions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_tools", "permissions", "prerequisites", "constraints"],
+      "properties": {
+        "required_tools": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "permissions": {
+          "type": ["array", "null"],
+          "items": {"type": "string", "minLength": 1}
+        },
+        "prerequisites": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "constraints": {
+          "type": ["array", "null"],
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "procedureStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["step_id", "instruction", "expected_observation", "evidence_refs"],
+      "properties": {
+        "step_id": {"type": "integer", "minimum": 1},
+        "instruction": {"type": "string", "minLength": 1},
+        "expected_observation": {"type": ["string", "null"]},
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "actionTrigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["condition", "action"],
+      "properties": {
+        "condition": {"type": "string", "minLength": 1},
+        "action": {"type": "string", "minLength": 1}
+      }
+    },
+    "episodeRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["episode_id", "source_run_id", "event_type", "outcome"],
+      "properties": {
+        "episode_id": {"type": "string", "minLength": 1},
+        "source_run_id": {"type": "string", "minLength": 1},
+        "event_type": {
+          "enum": ["action_run", "action_graph_run", "action_team_run", "tool_run"]
+        },
+        "outcome": {"type": "string", "minLength": 1}
+      }
+    },
+    "rewardSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "aggregation",
+        "computed_steps",
+        "episodes_without_computed_reward",
+        "note"
+      ],
+      "properties": {
+        "method": {"const": "progress_delta"},
+        "aggregation": {"const": "not_defined"},
+        "computed_steps": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/computedStep"}
+        },
+        "episodes_without_computed_reward": {"type": "integer", "minimum": 0},
+        "note": {"type": "string", "minLength": 1}
+      }
+    },
+    "computedStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["episode_id", "step_index", "step_reward", "method"],
+      "properties": {
+        "episode_id": {"type": "string", "minLength": 1},
+        "step_index": {"type": "integer", "minimum": 0},
+        "step_reward": {"type": "number"},
+        "method": {"const": "progress_delta"}
+      }
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "disposition": "normalized",
+  "detail": "Normalized.",
+  "episode": {
+    "episode_id": "run-graph-1",
+    "schema_version": 2,
+    "source_run_id": "run-graph-1",
+    "event_type": "action_graph_run",
+    "source": {
+      "collection": "EventResults",
+      "source_run_id": "run-graph-1",
+      "event_type": "action_graph_run",
+      "user_id": "user-2"
+    },
+    "task_intent": "Cycle graph",
+    "actions": [
+      "n2 start",
+      "from start",
+      "from redirect"
+    ],
+    "environment": {
+      "available_tools": [],
+      "permissions": null,
+      "constraints": null
+    },
+    "outcome": "success",
+    "steps": [
+      {
+        "node_id": "n2",
+        "provenance_node_id": "start",
+        "turn_no": 0,
+        "action": "n2 start",
+        "observation": "n2 out",
+        "index": 0,
+        "step_reward": null,
+        "reward_metadata": {
+          "method": "progress_delta",
+          "p_before": null,
+          "p_after": null,
+          "status": "pending",
+          "rationale": null
+        }
+      },
+      {
+        "node_id": "n1",
+        "provenance_node_id": "start",
+        "turn_no": 0,
+        "action": "from start",
+        "observation": "start out",
+        "action_name": "First node",
+        "index": 1,
+        "step_reward": null,
+        "reward_metadata": {
+          "method": "progress_delta",
+          "p_before": null,
+          "p_after": null,
+          "status": "pending",
+          "rationale": null
+        }
+      },
+      {
+        "node_id": "n1",
+        "provenance_node_id": "redirect",
+        "turn_no": 0,
+        "action": "from redirect",
+        "action_name": "First node",
+        "index": 2,
+        "step_reward": null,
+        "reward_metadata": {
+          "method": "progress_delta",
+          "p_before": null,
+          "p_after": null,
+          "status": "pending",
+          "rationale": null
+        }
+      }
+    ],
+    "reward_metadata": {
+      "method": "progress_delta",
+      "status": "pending",
+      "aggregation": "not_defined"
+    },
+    "bucket_id": null,
+    "warnings": [
+      "Graph node n2 is in node_vectors but not in output. The entry transcript was kept. The action name was not available.",
+      "Dropped a repeated context entry on node n1 for turn 0 from redirect.",
+      "Node n1 output contains results or an input_archive. Those inner rows were not expanded, because each context entry is one input/output for that execution.",
+      "Graph node only_output is in output but not in node_vectors. It was not emitted, because a populated node_vectors transcript is the step source."
+    ],
+    "task_summary": "Cycle graph"
+  }
+}

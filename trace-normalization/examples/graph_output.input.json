@@ -1,0 +1,21 @@
+{
+  "_id": "run-dag-1",
+  "type": "action_graph_run",
+  "status": "success",
+  "result": {
+    "name": "Plain DAG",
+    "output": {
+      "b": {
+        "name": "Bee",
+        "results": [
+          {"input": {"text": "bee in"}, "output": {"text": "bee out"}}
+        ]
+      },
+      "a": {
+        "name": "Ay",
+        "input": {"text": "ay in"},
+        "output": {"text": "ay out"}
+      }
+    }
+  }
+}

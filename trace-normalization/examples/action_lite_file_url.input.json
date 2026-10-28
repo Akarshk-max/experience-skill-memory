@@ -1,0 +1,7 @@
+{
+  "_id": "run-lite-1",
+  "type": "action_run",
+  "status": "success",
+  "file_url": "https://files.example/action_runs/user-1/run-lite-1.json",
+  "result": {"name": "Lite", "description": "no body"}
+}

@@ -1,0 +1,66 @@
+{
+  "disposition": "normalized",
+  "detail": "Normalized.",
+  "episode": {
+    "episode_id": "run-dag-1",
+    "schema_version": 2,
+    "source_run_id": "run-dag-1",
+    "event_type": "action_graph_run",
+    "source": {
+      "collection": "EventResults",
+      "source_run_id": "run-dag-1",
+      "event_type": "action_graph_run"
+    },
+    "task_intent": "Plain DAG",
+    "actions": [
+      "bee in",
+      "ay in"
+    ],
+    "environment": {
+      "available_tools": [],
+      "permissions": null,
+      "constraints": null
+    },
+    "outcome": "success",
+    "steps": [
+      {
+        "action": "bee in",
+        "observation": "bee out",
+        "node_id": "b",
+        "action_name": "Bee",
+        "index": 0,
+        "step_reward": null,
+        "reward_metadata": {
+          "method": "progress_delta",
+          "p_before": null,
+          "p_after": null,
+          "status": "pending",
+          "rationale": null
+        }
+      },
+      {
+        "action": "ay in",
+        "observation": "ay out",
+        "node_id": "a",
+        "action_name": "Ay",
+        "index": 1,
+        "step_reward": null,
+        "reward_metadata": {
+          "method": "progress_delta",
+          "p_before": null,
+          "p_after": null,
+          "status": "pending",
+          "rationale": null
+        }
+      }
+    ],
+    "reward_metadata": {
+      "method": "progress_delta",
+      "status": "pending",
+      "aggregation": "not_defined"
+    },
+    "bucket_id": null,
+    "warnings": [],
+    "task_summary": "Plain DAG"
+  }
+}

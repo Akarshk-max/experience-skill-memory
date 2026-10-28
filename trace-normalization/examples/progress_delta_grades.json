@@ -1,0 +1,11 @@
+{
+  "note": "Not a trace. A caller passes grades like these to apply_progress_grades after normalization. The traces themselves contain no probability estimates.",
+  "grades": [
+    {
+      "index": 0,
+      "p_before": 0.25,
+      "p_after": 0.75,
+      "rationale": "The tool result confirmed the account state."
+    }
+  ]
+}

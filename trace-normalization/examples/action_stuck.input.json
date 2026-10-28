@@ -1,0 +1,6 @@
+{
+  "_id": "run-action-stuck",
+  "type": "action_run",
+  "status": "stuck",
+  "result": {"results": [{"input": {"text": "partial"}}]}
+}

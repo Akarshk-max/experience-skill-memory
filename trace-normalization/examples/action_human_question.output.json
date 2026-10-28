@@ -1,0 +1,65 @@
+{
+  "disposition": "normalized",
+  "detail": "Normalized.",
+  "episode": {
+    "episode_id": "run-ask-1",
+    "schema_version": 2,
+    "source_run_id": "run-ask-1",
+    "event_type": "action_run",
+    "source": {
+      "collection": "EventResults",
+      "source_run_id": "run-ask-1",
+      "event_type": "action_run",
+      "parent_action_result_id": "parent-1",
+      "run_kind": "subagent"
+    },
+    "task_intent": null,
+    "actions": [
+      "ask the user"
+    ],
+    "environment": {
+      "available_tools": [],
+      "permissions": null,
+      "constraints": null
+    },
+    "outcome": "success",
+    "steps": [
+      {
+        "action": "ask the user",
+        "observation": "asked",
+        "turn_no": 0,
+        "index": 0,
+        "step_reward": null,
+        "reward_metadata": {
+          "method": "progress_delta",
+          "p_before": null,
+          "p_after": null,
+          "status": "pending",
+          "rationale": null
+        }
+      }
+    ],
+    "reward_metadata": {
+      "method": "progress_delta",
+      "status": "pending",
+      "aggregation": "not_defined"
+    },
+    "bucket_id": null,
+    "warnings": [],
+    "human_questions": [
+      {
+        "question_id": "q-1",
+        "turn_index": 0,
+        "status": "answered",
+        "question": "Which account?",
+        "asked_at": "2026-10-28T04:00:00Z",
+        "answer_text": "api_key: ***REDACTED***",
+        "answer_selected": [
+          "42"
+        ],
+        "answer_skipped": false,
+        "answered_at": "2026-10-28T04:01:00Z"
+      }
+    ]
+  }
+}

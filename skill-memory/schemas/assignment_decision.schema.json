@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://autobots.local/write-path/skill-memory/assignment_decision.schema.json",
+  "title": "BucketAssignmentDecision",
+  "description": "A proposed assignment. Confidence is advisory. Trusted code accepts the proposal only when it matches the deterministic matcher.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "candidate_bucket_id", "reason", "confidence"],
+  "properties": {
+    "decision": {"enum": ["assign_existing", "create_new", "ambiguous"]},
+    "candidate_bucket_id": {"type": ["string", "null"], "minLength": 1},
+    "reason": {"type": "string", "minLength": 1},
+    "confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1}
+  }
+}

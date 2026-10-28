@@ -1,0 +1,230 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://autobots.local/write-path/episode.schema.json",
+  "title": "NormalizedEpisode",
+  "description": "Schema version 2. One completed Autobots run after trace normalization. Source facts stay distinct from reserved reward and bucket fields. Unavailable reward estimates and bucket ids are null. This schema does not store the raw trace.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "episode_id",
+    "schema_version",
+    "source_run_id",
+    "event_type",
+    "source",
+    "task_intent",
+    "actions",
+    "environment",
+    "outcome",
+    "steps",
+    "reward_metadata",
+    "bucket_id",
+    "warnings"
+  ],
+  "properties": {
+    "episode_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The source run id. The same run normalizes to the same episode id."
+    },
+    "schema_version": {
+      "const": 2
+    },
+    "source_run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "event_type": {
+      "enum": ["action_run", "action_graph_run", "action_team_run", "tool_run"]
+    },
+    "task_intent": {
+      "type": ["string", "null"],
+      "description": "Source description, otherwise the run name, otherwise tool_name. Null when the document has none. Not an inferred label."
+    },
+    "task_summary": {
+      "type": "string",
+      "description": "Joined unique name, result name, result description, and tool_name. user_manual is not copied."
+    },
+    "actions": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "step.action values in step order. Steps with no action are omitted."
+    },
+    "environment": {"$ref": "#/$defs/environment"},
+    "outcome": {
+      "type": "string",
+      "description": "The stored terminal status. success, error, or cancelled. stuck is included only for tool_run. Never guessed."
+    },
+    "error_message": {
+      "type": "string",
+      "description": "TextObj.text from the event, when the source had one. Never invented."
+    },
+    "source_created_at": {"type": "string"},
+    "source_updated_at": {"type": "string"},
+    "source": {"$ref": "#/$defs/source"},
+    "steps": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/step"}
+    },
+    "human_questions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/humanQuestion"},
+      "description": "ask_human records kept beside the steps. They are not spliced into the step list."
+    },
+    "reward_metadata": {"$ref": "#/$defs/episodeReward"},
+    "bucket_id": {
+      "type": ["string", "null"],
+      "description": "Reserved for a later bucket assignment. Version 2 always emits null."
+    },
+    "warnings": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Normalizer notes. These are not source fields."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"event_type": {"const": "tool_run"}},
+        "required": ["event_type"]
+      },
+      "then": {
+        "properties": {
+          "outcome": {"enum": ["success", "error", "cancelled", "stuck"]}
+        }
+      },
+      "else": {
+        "properties": {
+          "outcome": {"enum": ["success", "error", "cancelled"]}
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["collection", "source_run_id", "event_type"],
+      "properties": {
+        "collection": {"const": "EventResults"},
+        "source_run_id": {"type": "string", "minLength": 1},
+        "event_type": {
+          "enum": ["action_run", "action_graph_run", "action_team_run", "tool_run"]
+        },
+        "user_id": {"type": "string"},
+        "file_url": {
+          "type": "string",
+          "description": "Canonical object URL with any query string removed."
+        },
+        "parent_action_result_id": {"type": "string"},
+        "run_kind": {"type": "string", "description": "subagent or branch when the source set it."}
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["available_tools", "permissions", "constraints"],
+      "properties": {
+        "available_tools": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Tool names observed on steps. Empty when none were observed."
+        },
+        "permissions": {
+          "type": ["array", "null"],
+          "items": {"type": "string"},
+          "description": "Null unless the trace states permissions. An empty array is not used as a substitute."
+        },
+        "constraints": {
+          "type": ["array", "null"],
+          "items": {"type": "string"},
+          "description": "Null unless the trace states execution constraints."
+        }
+      }
+    },
+    "episodeReward": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "status", "aggregation"],
+      "properties": {
+        "method": {"const": "progress_delta"},
+        "status": {"const": "pending"},
+        "aggregation": {
+          "const": "not_defined",
+          "description": "No trajectory-level formula is defined. Step rewards are not summed here."
+        }
+      }
+    },
+    "stepReward": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "p_before", "p_after", "status", "rationale"],
+      "properties": {
+        "method": {"const": "progress_delta"},
+        "p_before": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "p_after": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "status": {"enum": ["pending", "computed", "rejected"]},
+        "rationale": {"type": ["string", "null"]}
+      }
+    },
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["index", "step_reward", "reward_metadata"],
+      "properties": {
+        "index": {"type": "integer", "minimum": 0},
+        "turn_no": {"type": "integer", "minimum": 0},
+        "node_id": {
+          "type": "string",
+          "description": "Graph vector key, which is the executing node, or the output key on a plain DAG."
+        },
+        "provenance_node_id": {
+          "type": "string",
+          "description": "ContextEntry.node_id. Provenance, not the node that owns the vector."
+        },
+        "action": {"type": "string"},
+        "observation": {"type": "string"},
+        "tool_arguments": {
+          "description": "Object or list when the source arguments were JSON. Otherwise a string."
+        },
+        "tool_result": {"type": "string"},
+        "error": {"type": "string"},
+        "timestamp": {"type": "string"},
+        "started_at": {"type": "string"},
+        "ended_at": {"type": "string"},
+        "duration_ms": {"type": "number"},
+        "attempt": {"type": "integer", "minimum": 0},
+        "step_status": {"type": "string"},
+        "call_id": {"type": "string"},
+        "action_name": {"type": "string"},
+        "role": {"type": "string"},
+        "member_id": {"type": "string"},
+        "action_id": {"type": "string"},
+        "action_run_id": {"type": "string"},
+        "step_reward": {
+          "type": ["number", "null"],
+          "description": "p_after - p_before when both estimates were accepted. Null while pending or rejected. Not a discounted return."
+        },
+        "reward_metadata": {"$ref": "#/$defs/stepReward"}
+      }
+    },
+    "humanQuestion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["question"],
+      "properties": {
+        "question_id": {"type": "string"},
+        "turn_index": {"type": "integer", "minimum": 0},
+        "status": {"type": "string"},
+        "question": {"type": "string"},
+        "asked_at": {"type": "string"},
+        "answer_text": {"type": "string"},
+        "answer_selected": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "answer_skipped": {"type": "boolean"},
+        "answered_at": {"type": "string"}
+      }
+    }
+  }
+}

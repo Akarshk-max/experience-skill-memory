@@ -1,0 +1,75 @@
+{
+  "disposition": "normalized",
+  "detail": "Normalized.",
+  "episode": {
+    "episode_id": "run-team-1",
+    "schema_version": 2,
+    "source_run_id": "run-team-1",
+    "event_type": "action_team_run",
+    "source": {
+      "collection": "EventResults",
+      "source_run_id": "run-team-1",
+      "event_type": "action_team_run"
+    },
+    "task_intent": "Review team",
+    "actions": [
+      "draft the note",
+      "approve it"
+    ],
+    "environment": {
+      "available_tools": [],
+      "permissions": null,
+      "constraints": null
+    },
+    "outcome": "success",
+    "steps": [
+      {
+        "action": "draft the note",
+        "observation": "the note",
+        "action_name": "Researcher",
+        "role": "member",
+        "member_id": "member-1",
+        "action_id": "action-1",
+        "action_run_id": "child-run-1",
+        "started_at": "2026-10-28T02:00:00Z",
+        "ended_at": "2026-10-28T02:00:05Z",
+        "timestamp": "2026-10-28T02:00:00Z",
+        "duration_ms": 5000,
+        "index": 0,
+        "step_reward": null,
+        "reward_metadata": {
+          "method": "progress_delta",
+          "p_before": null,
+          "p_after": null,
+          "status": "pending",
+          "rationale": null
+        }
+      },
+      {
+        "action": "approve it",
+        "observation": "approved",
+        "action_name": "Lead",
+        "role": "leader",
+        "index": 1,
+        "step_reward": null,
+        "reward_metadata": {
+          "method": "progress_delta",
+          "p_before": null,
+          "p_after": null,
+          "status": "pending",
+          "rationale": null
+        }
+      }
+    ],
+    "reward_metadata": {
+      "method": "progress_delta",
+      "status": "pending",
+      "aggregation": "not_defined"
+    },
+    "bucket_id": null,
+    "warnings": [
+      "current_active_members was not converted into steps."
+    ],
+    "task_summary": "Review team"
+  }
+}

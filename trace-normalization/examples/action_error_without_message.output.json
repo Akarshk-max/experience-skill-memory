@@ -1,0 +1,47 @@
+{
+  "disposition": "normalized",
+  "detail": "Normalized.",
+  "episode": {
+    "episode_id": "run-error-1",
+    "schema_version": 2,
+    "source_run_id": "run-error-1",
+    "event_type": "action_run",
+    "source": {
+      "collection": "EventResults",
+      "source_run_id": "run-error-1",
+      "event_type": "action_run"
+    },
+    "task_intent": null,
+    "actions": [
+      "tried"
+    ],
+    "environment": {
+      "available_tools": [],
+      "permissions": null,
+      "constraints": null
+    },
+    "outcome": "error",
+    "steps": [
+      {
+        "action": "tried",
+        "observation": "failed visibly",
+        "index": 0,
+        "step_reward": null,
+        "reward_metadata": {
+          "method": "progress_delta",
+          "p_before": null,
+          "p_after": null,
+          "status": "pending",
+          "rationale": null
+        }
+      }
+    ],
+    "reward_metadata": {
+      "method": "progress_delta",
+      "status": "pending",
+      "aggregation": "not_defined"
+    },
+    "bucket_id": null,
+    "warnings": []
+  }
+}

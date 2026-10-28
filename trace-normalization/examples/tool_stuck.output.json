@@ -1,0 +1,49 @@
+{
+  "disposition": "normalized",
+  "detail": "Normalized.",
+  "episode": {
+    "episode_id": "run-tool-stuck",
+    "schema_version": 2,
+    "source_run_id": "run-tool-stuck",
+    "event_type": "tool_run",
+    "source": {
+      "collection": "EventResults",
+      "source_run_id": "run-tool-stuck",
+      "event_type": "tool_run"
+    },
+    "task_intent": "wait_for_user",
+    "actions": [
+      "wait_for_user"
+    ],
+    "environment": {
+      "available_tools": [
+        "wait_for_user"
+      ],
+      "permissions": null,
+      "constraints": null
+    },
+    "outcome": "stuck",
+    "steps": [
+      {
+        "action": "wait_for_user",
+        "index": 0,
+        "step_reward": null,
+        "reward_metadata": {
+          "method": "progress_delta",
+          "p_before": null,
+          "p_after": null,
+          "status": "pending",
+          "rationale": null
+        }
+      }
+    ],
+    "reward_metadata": {
+      "method": "progress_delta",
+      "status": "pending",
+      "aggregation": "not_defined"
+    },
+    "bucket_id": null,
+    "warnings": [],
+    "task_summary": "wait_for_user"
+  }
+}

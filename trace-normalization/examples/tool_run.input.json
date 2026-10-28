@@ -1,0 +1,11 @@
+{
+  "_id": "run-tool-1",
+  "type": "tool_run",
+  "status": "success",
+  "created_at": "2026-10-28T03:00:00Z",
+  "result": {
+    "tool_name": "lookup_account",
+    "tool_args": {"account_id": "42", "access_token": "fixture-token"},
+    "output": {"text": "bearer fixture-bearer-value"}
+  }
+}

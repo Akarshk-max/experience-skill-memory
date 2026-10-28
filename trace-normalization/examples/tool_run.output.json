@@ -1,0 +1,55 @@
+{
+  "disposition": "normalized",
+  "detail": "Normalized.",
+  "episode": {
+    "episode_id": "run-tool-1",
+    "schema_version": 2,
+    "source_run_id": "run-tool-1",
+    "event_type": "tool_run",
+    "source": {
+      "collection": "EventResults",
+      "source_run_id": "run-tool-1",
+      "event_type": "tool_run"
+    },
+    "task_intent": "lookup_account",
+    "actions": [
+      "lookup_account"
+    ],
+    "environment": {
+      "available_tools": [
+        "lookup_account"
+      ],
+      "permissions": null,
+      "constraints": null
+    },
+    "outcome": "success",
+    "steps": [
+      {
+        "action": "lookup_account",
+        "tool_arguments": {
+          "account_id": "42"
+        },
+        "tool_result": "bearer: ***REDACTED***",
+        "timestamp": "2026-10-28T03:00:00Z",
+        "index": 0,
+        "step_reward": null,
+        "reward_metadata": {
+          "method": "progress_delta",
+          "p_before": null,
+          "p_after": null,
+          "status": "pending",
+          "rationale": null
+        }
+      }
+    ],
+    "reward_metadata": {
+      "method": "progress_delta",
+      "status": "pending",
+      "aggregation": "not_defined"
+    },
+    "bucket_id": null,
+    "warnings": [],
+    "task_summary": "lookup_account",
+    "source_created_at": "2026-10-28T03:00:00Z"
+  }
+}

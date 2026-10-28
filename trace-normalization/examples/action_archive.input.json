@@ -1,0 +1,65 @@
+{
+  "_id": "run-archive-1",
+  "user_id": "user-1",
+  "type": "action_run",
+  "status": "success",
+  "name": "Lookup account",
+  "file_url": "https://files.example/action_runs/user-1/run-archive-1.json?X-Amz-Signature=fixture-query",
+  "created_at": "2026-10-28T00:00:00Z",
+  "updated_at": "2026-10-28T00:01:00Z",
+  "queued_inputs": {"inputs": ["later"]},
+  "result": {
+    "name": "Lookup account",
+    "description": "Find whether the account is active.",
+    "user_manual": "MANUAL-SENTINEL",
+    "time_saved_per_run": 12.5,
+    "dollar_cost_per_hour": 77,
+    "shared_with": ["space-sentinel"],
+    "config": {
+      "api_key": "config-sentinel",
+      "input_archive": [
+        {
+          "turn_number": 1,
+          "input": [
+            {
+              "role": "user",
+              "created_at": "2026-10-28T00:00:01Z",
+              "content": [{"type": "input_text", "text": "Look up account 42"}]
+            }
+          ],
+          "in_turn_messages": [
+            {"type": "reasoning", "encrypted_content": "opaque-reasoning-fixture"},
+            {
+              "type": "function_call",
+              "name": "lookup_account",
+              "call_id": "call-1",
+              "arguments": "{\"access_token\": \"fixture-token\", \"account_id\": \"42\"}"
+            },
+            {
+              "type": "function_call_output",
+              "call_id": "call-1",
+              "output": "status=active api_key: fixture-secret"
+            }
+          ],
+          "output": [
+            {
+              "role": "assistant",
+              "type": "message",
+              "content": [{"type": "output_text", "text": "Account 42 is active."}]
+            }
+          ],
+          "tool_errors": {}
+        }
+      ]
+    },
+    "results": [
+      {
+        "input": {"text": "ROW-SENTINEL"},
+        "output": {"text": "because the archive won"},
+        "started_at": "2026-10-28T00:00:02Z",
+        "turn": 0,
+        "status": "success"
+      }
+    ]
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://autobots.local/write-path/skill-memory/bucket.schema.json",
+  "title": "EvidenceBucket",
+  "description": "Schema version 1. Distinct Episode v2 references that share a task, an action pattern, and a compatible environment. Full traces are not stored on the bucket.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "bucket_id",
+    "schema_version",
+    "task_intent",
+    "representative_actions",
+    "environment_signature",
+    "episode_refs",
+    "distinct_trace_count",
+    "threshold",
+    "status",
+    "skill_id",
+    "generation_error",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "bucket_id": {"type": "string", "minLength": 1},
+    "schema_version": {"const": 1},
+    "task_intent": {
+      "type": ["string", "null"],
+      "description": "Copied from the seed episode. Null stays null."
+    },
+    "representative_actions": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Ordered actions from the seed episode. Later episodes do not rewrite this list."
+    },
+    "environment_signature": {"$ref": "#/$defs/environmentSignature"},
+    "episode_refs": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/episodeRef"}
+    },
+    "distinct_trace_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Recomputed from unique episode_refs. Not an model-supplied count."
+    },
+    "threshold": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Distinct episodes required before generation. Not a reward sum."
+    },
+    "status": {
+      "enum": ["collecting", "ready_for_generation", "generation_failed", "skill_created"]
+    },
+    "skill_id": {"type": ["string", "null"]},
+    "generation_error": {"type": ["string", "null"]},
+    "created_at": {"type": "string", "minLength": 1},
+    "updated_at": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "environmentSignature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "available_tools",
+        "permissions",
+        "constraints",
+        "permissions_known",
+        "constraints_known"
+      ],
+      "properties": {
+        "available_tools": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "permissions": {
+          "type": ["array", "null"],
+          "items": {"type": "string", "minLength": 1}
+        },
+        "constraints": {
+          "type": ["array", "null"],
+          "items": {"type": "string", "minLength": 1}
+        },
+        "permissions_known": {"type": "boolean"},
+        "constraints_known": {"type": "boolean"}
+      }
+    },
+    "episodeRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["episode_id", "source_run_id", "event_type", "outcome"],
+      "properties": {
+        "episode_id": {"type": "string", "minLength": 1},
+        "source_run_id": {"type": "string", "minLength": 1},
+        "event_type": {
+          "enum": ["action_run", "action_graph_run", "action_team_run", "tool_run"]
+        },
+        "outcome": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}
